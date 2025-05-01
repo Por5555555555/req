@@ -3,6 +3,8 @@ package fiberfunc
 import (
 	"bre-api/models"
 	"errors"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 type (
@@ -21,6 +23,11 @@ type (
 	Source      models.Source
 	Unit        models.Unit
 	User        models.User
+
+	ErrorHanderfliber struct {
+		Err     error
+		Startus int
+	}
 )
 
 var (
@@ -52,8 +59,21 @@ var (
 )
 
 var (
-	ErrorConvertJson   = errors.New("Error Convert Json to string")
-	ErrorConvertNumber = errors.New("Error Convet String to number")
+	ErrorConvertJson = ErrorHanderfliber{
+		Err:     errors.New("Error Convert Json to string"),
+		Startus: fiber.ErrBadRequest.Code,
+	}
+	ErrorConvertNumber = ErrorHanderfliber{
+		Err:     errors.New("Error Convet String to number"),
+		Startus: fiber.ErrBadRequest.Code,
+	}
+	ErrorToSql = ErrorHanderfliber{
+		Err:     errors.New("Error To Sqk"),
+		Startus: fiber.ErrBadRequest.Code,
+	}
+	ErrorNil = ErrorHanderfliber{
+		Err: nil,
+	}
 )
 
 // ---------------------------------------------------------------------------------------------------------------------//

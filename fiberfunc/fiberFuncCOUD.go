@@ -2,75 +2,168 @@ package fiberfunc
 
 import (
 	"bre-api/handler"
-	"fmt"
 	"reflect"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func GetGeneric[T any](c *fiber.Ctx) error {
-	id, err := GetId(c)
+	var (
+		id     int
+		err    error
+		result any
+	)
+
+	id, err = GetId(c)
 	if err != nil {
-		return OutText(c, nil, err)
+		c.Status(ErrorConvertNumber.Startus)
+		return c.SendString(ErrorConvertNumber.Err.Error())
 	}
 
-	data, err := handler.GetNoKey(new(T), id)
-	return OutText(c, data, err)
+	result, err = handler.GetNoKey(new(T), id)
+	if err != nil {
+		c.Status(ErrorToSql.Startus)
+		return c.SendString(ErrorToSql.Err.Error())
+	}
+	return c.JSON(result)
+}
+
+func GetGenericWithKey[T any](c *fiber.Ctx, joinTable []string) error {
+	var (
+		id     int
+		err    error
+		result any
+	)
+
+	id, err = GetId(c)
+	if err != nil {
+		c.Status(ErrorConvertNumber.Startus)
+		return c.SendString(ErrorConvertNumber.Err.Error())
+	}
+
+	result, err = handler.GetAllWithKey(new(T), joinTable, id)
+	if err != nil {
+		c.Status(ErrorToSql.Startus)
+		return c.SendString(ErrorToSql.Err.Error())
+	}
+	return OutJson(c, result, ErrorNil)
 }
 
 func GetAllGeneric[T any](c *fiber.Ctx) error {
-	limit := Limit(c.Params("limit"))
-	data, err := handler.GetNoKey(new([]T), 0, limit)
-	return OutText(c, data, err)
+	var (
+		limit  int
+		err    error
+		result any
+	)
+
+	limit = Limit(c.Params("limit"))
+	result, err = handler.GetNoKey(new([]T), 0, limit)
+	if err != nil {
+		c.Status(ErrorToSql.Startus)
+		return c.SendString(ErrorToSql.Err.Error())
+	}
+	return OutJson(c, result, ErrorNil)
+}
+func GetAllGenericWithKey[T any](c *fiber.Ctx, joinTable []string) error {
+	var (
+		limit  int
+		err    error
+		result any
+	)
+
+	limit = Limit(c.Params("limit"))
+	result, err = handler.GetAllWithKey(new(T), joinTable, 1, limit)
+	if err != nil {
+		c.Status(ErrorToSql.Startus)
+		return c.SendString(ErrorToSql.Err.Error())
+	}
+	return OutJson(c, result, ErrorNil)
 }
 
+// func UpdateGeneric[T any](c *fiber.Ctx) error {
+// 	id, err := GetId(c)
+// 	if err != nil {
+// 		return OutJson(c, nil, ErrorConvertNumber)
+// 	}
+// 	var data = new(T)
+// 	if err := c.BodyParser(&data); err != nil {
+// 		return OutJson(c, nil, ErrorConvertJson)
+// 	}
+// 	reflect.ValueOf(data).Elem().FieldByName("ID").SetUint(uint64(id))
+//
+//  result, err := handler.Updata(&data)
+// 	if err != nil {
+// 		return OutJson(c, result, ErrorToSql)
+// 	}
+// 	return OutJson(c, result, ErrorNil)
+// }
+
 func UpdateGeneric[T any](c *fiber.Ctx) error {
-	id, err := GetId(c)
+	var (
+		id     int
+		err    error
+		result any
+		data   T
+	)
+
+	id, err = GetId(c)
 	if err != nil {
-		return OutText(c, nil, err)
+		c.Status(ErrorConvertNumber.Startus)
+		return c.SendString(ErrorConvertNumber.Err.Error())
 	}
 
-	var data = new(T)
-	if err := c.BodyParser(&data); err != nil {
-		return OutText(c, nil, ErrorConvertJson)
+	if err = c.BodyParser(&data); err != nil {
+		c.Status(ErrorConvertJson.Startus)
+		return c.SendString(ErrorConvertJson.Err.Error())
 	}
 	reflect.ValueOf(data).Elem().FieldByName("ID").SetUint(uint64(id))
-	updateData, err := handler.Updata(&data)
-	return OutText(c, updateData, err)
+
+	result, err = handler.Updata(&data)
+	if err != nil {
+		c.Status(ErrorToSql.Startus)
+		return c.SendString(ErrorToSql.Err.Error())
+	}
+	return OutJson(c, result, ErrorNil)
 }
 
 func CreateGeneric[T any](c *fiber.Ctx) error {
-	var data = new(T)
-	if err := c.BodyParser(&data); err != nil {
-		return OutText(c, nil, ErrorConvertJson)
+	var (
+		err    error
+		result any
+		data   T
+	)
+
+	err = c.BodyParser(&data)
+	if err != nil {
+		c.Status(ErrorConvertJson.Startus)
+		return c.SendString(ErrorConvertJson.Err.Error())
 	}
 
-	process, err := handler.Create(&data)
-	return OutText(c, process, err)
+	result, err = handler.Create(&data)
+	if err != nil {
+		c.Status(ErrorToSql.Startus)
+		return c.SendString(ErrorToSql.Err.Error())
+	}
+	return OutJson(c, result, ErrorNil)
 }
 
 func DeteleGeneric[T any](c *fiber.Ctx) error {
-	id, err := GetId(c)
+	var (
+		id     int
+		err    error
+		result any
+	)
+
+	id, err = GetId(c)
 	if err != nil {
-		return OutText(c, nil, err)
+		c.Status(ErrorConvertNumber.Startus)
+		return c.SendString(ErrorConvertNumber.Err.Error())
 	}
 
-	process, err := handler.Delete(new(T), id)
-	return OutText(c, process, err)
-}
-
-func GetGenericWithKey[T any](c *fiber.Ctx, TableConnect []string) error {
-	id, err := GetId(c)
+	result, err = handler.Delete(new(T), id)
 	if err != nil {
-		return OutText(c, nil, ErrorConvertNumber)
+		c.Status(ErrorToSql.Startus)
+		return c.SendString(ErrorToSql.Err.Error())
 	}
-	fmt.Println(TableConnect)
-	data, err := handler.GetAllWithKey(new(T), TableConnect, id)
-	return OutText(c, data, err)
-}
-
-func GetAllGenericWithKey[T any](c *fiber.Ctx, TableConnect []string) error {
-	limit := Limit(c.Params("limit"))
-	data, err := handler.GetAllWithKey(new(T), TableConnect, 1, limit)
-	return OutText(c, data, err)
+	return OutJson(c, result, ErrorNil)
 }

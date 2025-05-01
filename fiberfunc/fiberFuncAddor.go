@@ -11,10 +11,7 @@ import (
 
 func GetId(c *fiber.Ctx) (int, error) {
 	id, err := c.ParamsInt("id")
-	if err != nil {
-		return 0, ErrorConvertNumber
-	}
-	return id, nil
+	return id, err
 }
 
 func GetUid(c *fiber.Ctx) (uint, error) {
@@ -25,9 +22,9 @@ func GetUid(c *fiber.Ctx) (uint, error) {
 	return uint(id), nil
 }
 
-func OutText(c *fiber.Ctx, data any, err error) error {
-	if err != nil {
-		return c.Status(fiber.ErrBadRequest.Code).SendString(err.Error())
+func OutJson(c *fiber.Ctx, data any, status ErrorHanderfliber) error {
+	if status.Err != nil {
+		return c.Status(status.Startus).SendString(status.Err.Error())
 	}
 	return c.JSON(data)
 }
