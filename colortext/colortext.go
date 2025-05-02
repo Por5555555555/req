@@ -23,7 +23,6 @@ func IsErr[T any](Gstring T) {
 	errColor.Print("Err")
 	fmt.Print(" : ")
 	log.Fatalln(textOut(Gstring))
-
 }
 
 func IsTime[T any](Gstring T) {
@@ -38,4 +37,9 @@ func IsTime[T any](Gstring T) {
 func IsWanging[T any](Gstring T) {
 	Wanging := color.New(color.FgYellow).Add(color.Underline).SprintFunc()
 	fmt.Println("Wanging", Wanging(Gstring))
+}
+
+func IsLogErr[T any](Gstring T) {
+	LogErr := color.New(color.FgCyan).Add(color.Underline).SprintFunc()
+	fmt.Println("Log Error", LogErr(Gstring))
 }

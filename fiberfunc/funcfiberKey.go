@@ -41,10 +41,10 @@ func (File) GetAll(c *fiber.Ctx) error {
 	return GetAllGenericWithKey[File](c, FileKey)
 }
 func (File) Create(c *fiber.Ctx) error {
-	return CreateGeneric[File](c)
+	return UploadfileGeneric[File](c, FileModelsUpload)
 }
 func (File) Update(c *fiber.Ctx) error {
-	return UpdateGeneric[File](c)
+	return UpdateFile[File](c, FileModelsUpload)
 }
 func (File) Delete(c *fiber.Ctx) error {
 	return DeteleGeneric[File](c)

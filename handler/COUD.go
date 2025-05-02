@@ -50,39 +50,3 @@ func Delete(myStruct interface{}, Id int) (any, error) {
 	err := db.Unscoped().Delete(ItStruct, Id).Error
 	return "Ok To Delete", err
 }
-
-// func IdOrLimt(num any) (int, uint) {
-
-// 	switch reflect.TypeOf(num).Kind() {
-// 	case reflect.Int:
-// 		return int(reflect.ValueOf(num).Int()), 0
-// 	default:
-// 		return 0, uint(int(reflect.ValueOf(num).Kind()))
-// 	}
-// }
-
-// func GetAllWithKey(myStruct interface{}, Peoload []string) (interface{}, error) {
-// 	db := databases.GetConn()
-// 	var ItStruct = myStruct
-// 	for _, preload := range Peoload {
-// 		db = db.Preload(preload)
-// 		if err := db.Error; err != nil {
-// 			return nil, err
-// 		}
-// 	}
-// 	err := db.Find(ItStruct).Error
-// 	return myStruct, err
-// }
-
-// func GetWithKey(myStruct interface{}, id uint, Peoload []string) (interface{}, error) {
-// 	db := databases.GetConn()
-// 	var ItStruct = myStruct
-// 	for _, preload := range Peoload {
-// 		db := db.Preload(preload)
-// 		if err := db.Error; err != nil {
-// 			return nil, err
-// 		}
-// 	}
-// 	err := db.Find(ItStruct, id).Error
-// 	return ItStruct, err
-// }

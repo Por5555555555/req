@@ -53,7 +53,7 @@ type File struct {
 	NamePhoto string
 	PhotoPath string
 
-	NameRepait string
+	NameRepair string
 	RepairPath string
 
 	NameDiagram string

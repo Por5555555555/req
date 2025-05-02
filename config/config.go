@@ -12,7 +12,7 @@ const (
 	// config Open Sql
 	OpenServerDataBase    = true
 	OpSql                 = false
-	CrTable               = false
+	CrTable               = true
 	CrUser                = false
 	TLogH                 = false
 	EndProcessOpen        = "NotProcessOpen"
@@ -20,7 +20,8 @@ const (
 	EndProcessCreateData  = "NotProcessOpen"
 	Limit                 = 10
 
-	Openflber = true
+	Openflber   = true
+	MaxSizeFile = 5 * 1024 * 1024
 )
 
 var ErrorSqlLite = errors.New("Error Sql lite")
