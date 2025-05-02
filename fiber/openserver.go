@@ -1,27 +1,27 @@
 package fiberopen
 
 import (
-	"bre-api/fiberfunc"
+	"bre-api/fiber/routes"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 var (
-	Agency      = new(fiberfunc.Agency)
-	Auditor     = new(fiberfunc.Auditor)
-	Category    = new(fiberfunc.Category)
-	Consider    = new(fiberfunc.Consider)
-	Equipment   = new(fiberfunc.Equipment)
-	File        = new(fiberfunc.File)
-	Location    = new(fiberfunc.Location)
-	Money       = new(fiberfunc.Money)
-	Necessary   = new(fiberfunc.Necessary)
-	Price       = new(fiberfunc.Price)
-	Province    = new(fiberfunc.Province)
-	Reqlacement = new(fiberfunc.Reqlacement)
-	Source      = new(fiberfunc.Source)
-	Unit        = new(fiberfunc.Unit)
-	User        = new(fiberfunc.User)
+	Agency      = new(routes.Agency)
+	Auditor     = new(routes.Auditor)
+	Category    = new(routes.Category)
+	Consider    = new(routes.Consider)
+	Equipment   = new(routes.Equipment)
+	File        = new(routes.File)
+	Location    = new(routes.Location)
+	Money       = new(routes.Money)
+	Necessary   = new(routes.Necessary)
+	Price       = new(routes.Price)
+	Province    = new(routes.Province)
+	Reqlacement = new(routes.Reqlacement)
+	Source      = new(routes.Source)
+	Unit        = new(routes.Unit)
+	User        = new(routes.User)
 )
 
 func OpenServer() {
