@@ -18,6 +18,7 @@ type (
 	Price       models.Price
 	Province    models.Province
 	Reqlacement models.Reqlacement
+	Requests    models.Requests
 	Source      models.Source
 	Unit        models.Unit
 	User        models.User
@@ -48,6 +49,14 @@ var (
 	ReqlacementKey = fiberfuncConfig.GetString([]any{
 		Equipment{},
 		Source{},
+	})
+	RequestKey = fiberfuncConfig.GetString([]any{
+		Agency{},
+		Location{},
+		Equipment{},
+		Category{},
+		Price{},
+		Auditor{},
 	})
 )
 

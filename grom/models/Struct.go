@@ -111,6 +111,29 @@ type Reqlacement struct {
 	Day         time.Time `gorm:"type:DATE;"`
 }
 
+type Requests struct {
+	gorm.Model
+	AgencyID    uint
+	Agency      Agency
+	LocationID  uint
+	Location    Location
+	EquipmentID uint
+	Equipment   Equipment
+	CategoryID  uint
+	Category    Category
+	Replace     string
+	Request     string
+	PriceID     uint
+	Price       Price
+	AuditorID   uint
+	Auditor     Auditor
+	UserID      uint
+	User        User
+	Remark      string
+	Date        time.Time
+	Necessary
+}
+
 type Source struct {
 	gorm.Model
 	Name string

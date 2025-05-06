@@ -23,6 +23,7 @@ func CreateTabel() error {
 		&models.Consider{},
 		&models.Necessary{},
 		&models.File{},
+		&models.Requests{},
 	}
 
 	err := DB.AutoMigrate(myStruct...)

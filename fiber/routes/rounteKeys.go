@@ -117,3 +117,19 @@ func (Reqlacement) Update(c *fiber.Ctx) error {
 func (Reqlacement) Delete(c *fiber.Ctx) error {
 	return fiberfuncCOUD.DeteleGeneric[Reqlacement](c)
 }
+
+func (Requests) Get(c *fiber.Ctx) error {
+	return fiberfuncCOUD.GetGenericWithKey[Requests](c, RequestKey)
+}
+func (Requests) GetAll(c *fiber.Ctx) error {
+	return fiberfuncCOUD.GetAllGenericWithKey[Requests](c, RequestKey)
+}
+func (Requests) Create(c *fiber.Ctx) error {
+	return fiberfuncCOUD.CreateGeneric[Requests](c)
+}
+func (Requests) Update(c *fiber.Ctx) error {
+	return fiberfuncCOUD.UpdateGeneric[Requests](c)
+}
+func (Requests) Delete(c *fiber.Ctx) error {
+	return fiberfuncCOUD.DeteleGeneric[Requests](c)
+}

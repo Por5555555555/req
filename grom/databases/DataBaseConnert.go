@@ -91,7 +91,7 @@ func GetConn() *gorm.DB {
 
 func openSql(T bool, TLogH bool) (*gorm.DB, error) {
 	newLogger := getLog(TLogH)
-	dns := "grom/databases/testdb/dbreq.db"
+	dns := config.LoaclSqlite
 	if T {
 		dns = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 			user,
