@@ -45,7 +45,7 @@ func CreateTable(crTable bool) error {
 	if !crTable {
 		return nil
 	}
-	err := createTabel()
+	err := CreateTabel()
 	endProcessCreateTable = time.Since(process_crTab).String()
 	return err
 }
@@ -56,7 +56,7 @@ func CreateData(crUser bool) error {
 		return nil
 	}
 
-	endProcess, err := testFunc(process_TestU)
+	endProcess, err := TestFunc(process_TestU)
 	endProcessCreateData = endProcess
 	return err
 }

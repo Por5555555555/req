@@ -58,6 +58,10 @@ func GetString(Item []any) []string {
 	return NameTable
 }
 
+func GetStringFrist(Item []any) string {
+	return reflect.TypeOf(Item[0]).Name()
+}
+
 func GetFilePath(val reflect.Value, fieldName string) (string, error) {
 	fieldPath := val.FieldByName(fieldName)
 	if !fieldPath.IsValid() {
@@ -102,7 +106,7 @@ func UploadFile(c *fiber.Ctx, StringName string) (*multipart.FileHeader, string,
 
 func CheckCreateFile(StringName string, dataValue reflect.Value, file multipart.FileHeader, filePath string) {
 	fieldName := strings.Replace(StringName, "Upload", "", 1)
-	if field := dataValue.FieldByName(fieldName + "Name"); field.IsValid() {
+	if field := dataValue.FieldByName("Name" + fieldName); field.IsValid() {
 		field.SetString(file.Filename)
 	}
 	if field := dataValue.FieldByName(fieldName + "Path"); field.IsValid() {

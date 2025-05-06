@@ -58,3 +58,5 @@ var FileModelsUpload = []string{
 	"UploadDiagram",
 	"UploadDetails",
 }
+
+var FileIdConnect = "ReqlacementID"

@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func testFunc(T time.Time) (string, error) {
+func TestFunc(T time.Time) (string, error) {
 	endProcess, err := testAll(T)
 	if err != nil {
 		return "", err

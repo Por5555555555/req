@@ -8,8 +8,7 @@ import (
 
 type Agency struct {
 	gorm.Model
-	Name     string
-	Location []Location `gorm:"foreignKey:AgencyID"`
+	Name string
 }
 
 type Auditor struct {
@@ -21,7 +20,6 @@ type Auditor struct {
 type Category struct {
 	gorm.Model
 	Name string
-	// Equipment []Equipment `gorm:"foreignKey:CategoryID"`
 }
 
 type Consider struct {
@@ -77,8 +75,7 @@ type Location struct {
 
 type Money struct {
 	gorm.Model
-	Name        string
-	Reqlacement []Reqlacement `gorm:"foreignKey:MoneyID"`
+	Name string
 }
 
 type Necessary struct {
@@ -100,33 +97,28 @@ type Price struct {
 
 type Province struct {
 	gorm.Model
-	Name     string
-	Location []Location `gorm:"foreignKey:ProvinceID"`
+	Name string
 }
 
 type Reqlacement struct {
 	gorm.Model
-	EquipmentID uint       `gorm:"not null"`
-	Equipment   Equipment  `gorm:"constraint:OnDelete:CASCADE"`
-	SourceID    uint       `gorm:"not null"`
-	Source      Source     `gorm:"constraint:OnDelete:CASCADE"`
-	MoneyID     uint       `gorm:"not null"`
-	Money       Money      `gorm:"constraint:OnDelete:CASCADE"`
-	Consider    []Consider `gorm:"foreignKey:ReqlacementID"`
-	File        []File     `gorm:"foreignKey:ReqlacementID"`
-	Day         time.Time  `gorm:"type:DATE;"`
+	EquipmentID uint      `gorm:"not null"`
+	Equipment   Equipment `gorm:"constraint:OnDelete:CASCADE"`
+	SourceID    uint      `gorm:"not null"`
+	Source      Source    `gorm:"constraint:OnDelete:CASCADE"`
+	MoneyID     uint      `gorm:"not null"`
+	Money       Money     `gorm:"constraint:OnDelete:CASCADE"`
+	Day         time.Time `gorm:"type:DATE;"`
 }
 
 type Source struct {
 	gorm.Model
-	Name        string
-	Reqlacement []Reqlacement `gorm:"foreignKey:SourceID"`
+	Name string
 }
 
 type Unit struct {
 	gorm.Model
-	Name      string
-	Equipment []Equipment `gorm:"foreignKey:UnitID"`
+	Name string
 }
 
 type User struct {

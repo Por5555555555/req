@@ -2,7 +2,6 @@ package routes
 
 import (
 	"bre-api/fiber/fiberfunc/fiberfuncCOUD"
-	"bre-api/fiber/fiberfunc/fiberfuncFile"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -46,13 +45,13 @@ func (File) GetAll(c *fiber.Ctx) error {
 	return fiberfuncCOUD.GetAllGenericWithKey[File](c, FileKey)
 }
 func (File) Create(c *fiber.Ctx) error {
-	return fiberfuncFile.UploadfileGeneric[File](c, FileModelsUpload)
+	return fiberfuncCOUD.CreateGeneric[File](c)
 }
 func (File) Update(c *fiber.Ctx) error {
-	return fiberfuncFile.UpdateFile[File](c, FileModelsUpload)
+	return fiberfuncCOUD.UpdateGeneric[File](c)
 }
 func (File) Delete(c *fiber.Ctx) error {
-	return fiberfuncFile.DeleteFile[File](c, FileModelsUpload)
+	return fiberfuncCOUD.DeteleGeneric[File](c)
 }
 
 func (Location) Get(c *fiber.Ctx) error {

@@ -1,8 +1,10 @@
 package databases
 
-import "bre-api/grom/models"
+import (
+	"bre-api/grom/models"
+)
 
-func createTabel() error {
+func CreateTabel() error {
 	myStruct := []interface{}{
 
 		&models.Equipment{},
