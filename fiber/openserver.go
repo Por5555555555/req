@@ -19,6 +19,7 @@ var (
 	Price       = new(routes.Price)
 	Province    = new(routes.Province)
 	Reqlacement = new(routes.Reqlacement)
+	Requests    = new(routes.Requests)
 	Source      = new(routes.Source)
 	Unit        = new(routes.Unit)
 	User        = new(routes.User)
@@ -98,6 +99,12 @@ func OpenServer() {
 	app.Post("home/reqlacement/create", Reqlacement.Create)
 	app.Put("home/reqlacement/update/:id", Reqlacement.Update)
 	app.Delete("home/reqlacement/delete/:id", Reqlacement.Delete)
+
+	app.Get("home/Requests/:id", Requests.Get)
+	app.Get("home/Requests/all/:limit", Requests.GetAll)
+	app.Post("home/Requests/create", Requests.Create)
+	app.Put("home/Requests/update/:id", Requests.Update)
+	app.Delete("home/Requests/delete/:id", Requests.Delete)
 
 	app.Get("home/source/:id", Source.Get)
 	app.Get("home/source/all/:limit", Source.GetAll)
