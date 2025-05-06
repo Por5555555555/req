@@ -1,7 +1,7 @@
 package databases
 
 import (
-	"bre-api/colortext"
+	"bre-api/addOn/colortext"
 	"bre-api/config"
 	"fmt"
 	"log"

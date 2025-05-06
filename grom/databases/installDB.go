@@ -1,6 +1,6 @@
 package databases
 
-import "bre-api/models"
+import "bre-api/grom/models"
 
 func createTabel() error {
 	myStruct := []interface{}{

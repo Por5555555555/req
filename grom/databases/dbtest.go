@@ -1,8 +1,8 @@
 package databases
 
 import (
-	"bre-api/colortext"
-	"bre-api/models"
+	"bre-api/addOn/colortext"
+	"bre-api/grom/models"
 	"fmt"
 	"reflect"
 	"time"

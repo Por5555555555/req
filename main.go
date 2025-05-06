@@ -1,10 +1,10 @@
 package main
 
 import (
-	"bre-api/colortext"
+	"bre-api/addOn/colortext"
 	"bre-api/config"
-	"bre-api/databases"
 	fiberopen "bre-api/fiber"
+	"bre-api/grom/databases"
 	"fmt"
 )
 

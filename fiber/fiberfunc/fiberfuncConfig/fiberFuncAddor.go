@@ -1,7 +1,7 @@
 package fiberfuncConfig
 
 import (
-	"bre-api/colortext"
+	"bre-api/addOn/colortext"
 	"bre-api/config"
 	"errors"
 	"fmt"
@@ -9,6 +9,7 @@ import (
 	"os"
 	"reflect"
 	"strconv"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -97,4 +98,14 @@ func UploadFile(c *fiber.Ctx, StringName string) (*multipart.FileHeader, string,
 	}
 
 	return file, filePath, nil
+}
+
+func CheckCreateFile(StringName string, dataValue reflect.Value, file multipart.FileHeader, filePath string) {
+	fieldName := strings.Replace(StringName, "Upload", "", 1)
+	if field := dataValue.FieldByName(fieldName + "Name"); field.IsValid() {
+		field.SetString(file.Filename)
+	}
+	if field := dataValue.FieldByName(fieldName + "Path"); field.IsValid() {
+		field.SetString(filePath)
+	}
 }
