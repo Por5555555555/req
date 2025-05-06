@@ -91,7 +91,7 @@ func GetConn() *gorm.DB {
 
 func openSql(T bool, TLogH bool) (*gorm.DB, error) {
 	newLogger := getLog(TLogH)
-	dns := "testdb/dbreq.db"
+	dns := "grom/databases/testdb/dbreq.db"
 	if T {
 		dns = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 			user,
@@ -112,6 +112,7 @@ func openSql(T bool, TLogH bool) (*gorm.DB, error) {
 		DisableForeignKeyConstraintWhenMigrating: true,
 		Logger:                                   newLogger,
 	})
+	// panic(err)
 	if err != nil {
 		err = ErrorSqlLite
 	}
