@@ -26,7 +26,7 @@ func getIdOrAll(myStruct any, db gorm.DB, GetWich ...int) (any, error) {
 	case 2:
 		err = db.Limit(GetWich[1]).Find(myStruct).Error
 	default:
-		err = db.Find(myStruct, GetWich[0]).Error
+		err = db.First(myStruct, GetWich[0]).Error
 	}
 	return myStruct, err
 }

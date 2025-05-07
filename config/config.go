@@ -7,15 +7,15 @@ import (
 
 const (
 	// config Sql not sqlite
-	Host     = 0
+	Host     = "Ip"
 	Port     = 0
-	User     = 0
-	Password = 0
-	Dbname   = 0
+	User     = "Name"
+	Password = "Password"
+	Dbname   = "Name DataBase"
 	// config Open Sql
 	OpenServerDataBase    = true
 	OpSql                 = false
-	CrTable               = true
+	CrTable               = false
 	CrUser                = false
 	TLogH                 = false
 	EndProcessOpen        = "NotProcessOpen"

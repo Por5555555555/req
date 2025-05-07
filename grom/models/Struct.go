@@ -82,8 +82,8 @@ type Necessary struct {
 	gorm.Model
 	LocationID uint     `gorm:"not null"`
 	Location   Location `gorm:"constraint:OnDelete:CASCADE"`
-	Frequency  string   `gorm:"type:string;check:frequency IN ('ใช้บ่อย','ไม่บ่อย');default:'ไม่บ่อย'"`
-	Province   string   `gorm:"type:string;check:province IN ('Y','N');default:'N'"`
+	Frequency  string   `gorm:"type:enum('ใช้บ่อย','ไม่บ่อย');default:'ไม่บ่อย'"`
+	Province   string   `gorm:"type:enum('Y','N');default:'N'"`
 	Other      string
 }
 
@@ -112,23 +112,26 @@ type Reqlacement struct {
 }
 
 type Requests struct {
-	gorm.Model
+	ID        uint `gorm:"primaryKey"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+
 	AgencyID    uint
-	Agency      Agency
+	Agency      Agency `gorm:"foreignKey:AgencyID"`
 	LocationID  uint
-	Location    Location
+	Location    Location `gorm:"foreignKey:LocationID"`
 	EquipmentID uint
-	Equipment   Equipment
+	Equipment   Equipment `gorm:"foreignKey:EquipmentID"`
 	CategoryID  uint
-	Category    Category
+	Category    Category `gorm:"foreignKey:CategoryID"`
 	Replace     string
 	Request     string
 	PriceID     uint
-	Price       Price
+	Price       Price `gorm:"foreignKey:PriceID"`
 	AuditorID   uint
-	Auditor     Auditor
+	Auditor     Auditor `gorm:"foreignKey:AuditorID"`
 	UserID      uint
-	User        User
+	User        User `gorm:"foreignKey:UserID"`
 	Remark      string
 	Date        time.Time
 	Necessary

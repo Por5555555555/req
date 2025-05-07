@@ -12,13 +12,13 @@ func GetGeneric[T any](c *fiber.Ctx) error {
 	id, err := fiberfuncConfig.GetId(c)
 	if err != nil {
 		c.Status(fiberfuncConfig.ErrorConvertNumber.Startus)
-		return c.JSON(fiberfuncConfig.ErrorConvertJson.Err)
+		return c.JSON(fiberfuncConfig.ErrorConvertJson.Err.Error())
 	}
 
 	result, err := handler.GetNoKey(new(T), id)
 	if err != nil {
 		c.Status(fiberfuncConfig.ErrorToSql.Startus)
-		return c.JSON(fiberfuncConfig.ErrorToSql.Err)
+		return c.JSON(fiberfuncConfig.ErrorToSql.Err.Error())
 	}
 	return c.JSON(result)
 }
@@ -34,7 +34,7 @@ func GetAllGeneric[T any](c *fiber.Ctx) error {
 	result, err = handler.GetNoKey(new([]T), 0, limit)
 	if err != nil {
 		c.Status(fiberfuncConfig.ErrorToSql.Startus)
-		return c.JSON(fiberfuncConfig.ErrorToSql.Err)
+		return c.JSON(fiberfuncConfig.ErrorToSql.Err.Error())
 	}
 	return c.JSON(result)
 }
@@ -73,7 +73,7 @@ func GetAllGenericWithKey[T any](c *fiber.Ctx, joinTable []string) error {
 	result, err = handler.GetAllWithKey(new(T), joinTable, 1, limit)
 	if err != nil {
 		c.Status(fiberfuncConfig.ErrorToSql.Startus)
-		return c.JSON(fiberfuncConfig.ErrorToSql.Err)
+		return c.JSON(fiberfuncConfig.ErrorToSql.Err.Error())
 	}
 	return c.JSON(result)
 }
