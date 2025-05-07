@@ -1,6 +1,9 @@
 package config
 
-import "errors"
+import (
+	"errors"
+	"time"
+)
 
 const (
 	// config Sql not sqlite
@@ -21,8 +24,9 @@ const (
 	Limit                 = 10
 	LoaclSqlite           = "grom/databases/testdb/dbreq.db"
 
-	Openflber   = true
-	MaxSizeFile = 5 * 1024 * 1024
+	Openflber      = true
+	MaxSizeFile    = 5 * 1024 * 1024
+	CookieLifeTime = time.Hour * 72
 )
 
 var ErrorSqlLite = errors.New("Error Sql lite")

@@ -46,6 +46,14 @@ var (
 		Err:     errors.New("Error To Detele file"),
 		Startus: fiber.ErrBadRequest.Code,
 	}
+	ErrorToHashPassword = ErrorHanderfliber{
+		Err:     errors.New("Sus"),
+		Startus: fiber.StatusBadRequest,
+	}
+	ErrorToEnv = ErrorHanderfliber{
+		Err:     errors.New("Error To Bad Config"),
+		Startus: fiber.ErrBadGateway.Code,
+	}
 	ErrorNil = ErrorHanderfliber{
 		Err: nil,
 	}

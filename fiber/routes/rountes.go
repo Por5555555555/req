@@ -2,6 +2,7 @@ package routes
 
 import (
 	"bre-api/fiber/fiberfunc/fiberfuncCOUD"
+	fiberfuncCOUDaddOn "bre-api/fiber/fiberfunc/fiberfuncCOUD/fiberfuncAddOn"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -119,17 +120,25 @@ func (Unit) Delete(c *fiber.Ctx) error {
 }
 
 func (User) Get(c *fiber.Ctx) error {
-	return fiberfuncCOUD.GetGeneric[User](c)
+	return c.JSON("this func dont support")
 }
 func (User) GetAll(c *fiber.Ctx) error {
-	return fiberfuncCOUD.GetAllGeneric[User](c)
+	return c.JSON("this func dont support")
 }
 func (User) Create(c *fiber.Ctx) error {
-	return fiberfuncCOUD.CreateGeneric[User](c)
+	return fiberfuncCOUDaddOn.CreateUser(c)
+}
+func (User) Login(c *fiber.Ctx) error {
+	return fiberfuncCOUDaddOn.LoginUser(c)
 }
 func (User) Update(c *fiber.Ctx) error {
-	return fiberfuncCOUD.UpdateGeneric[User](c)
+	return c.JSON("this func dont support")
 }
 func (User) Delete(c *fiber.Ctx) error {
-	return fiberfuncCOUD.DeteleGeneric[User](c)
+	return c.JSON("this func dont support")
+}
+
+// ----------------------------------------
+func BlockFunc(c *fiber.Ctx) error {
+	return fiberfuncCOUDaddOn.BlockFunc(c)
 }

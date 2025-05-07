@@ -149,6 +149,6 @@ type User struct {
 	FirstName    string
 	LastName     string
 	LevelUser    string
-	AccountUser  string
+	Email        string
 	PasswordUser string
 }
