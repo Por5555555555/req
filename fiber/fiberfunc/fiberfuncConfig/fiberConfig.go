@@ -50,6 +50,10 @@ var (
 		Err:     errors.New("Sus"),
 		Startus: fiber.StatusBadRequest,
 	}
+	ErrorToJwt = ErrorHanderfliber{
+		Err:     errors.New("Error To Jwt"),
+		Startus: fiber.StatusUnauthorized,
+	}
 	ErrorToEnv = ErrorHanderfliber{
 		Err:     errors.New("Error To Bad Config"),
 		Startus: fiber.ErrBadGateway.Code,

@@ -1,9 +1,11 @@
 package fiberopen
 
 import (
+	fiberfuncCOUDaddOn "bre-api/fiber/fiberfunc/fiberfuncCOUD/fiberfuncAddOn"
 	"bre-api/fiber/routes"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 var (
@@ -28,9 +30,18 @@ var (
 func OpenServer() {
 	app := fiber.New()
 
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "http://localhost:5173", // ระบุ origin ตรง ๆ
+		AllowCredentials: true,                    // เปิดให้ส่ง cookie ได้
+		AllowHeaders:     "Content-Type,Authorization",
+		AllowMethods:     "GET,POST,PUT,DELETE,OPTIONS",
+	}))
+
 	app.Use("/home", routes.BlockFunc)
 	app.Post("create", User.Create)
 	app.Post("login", User.Login)
+	app.Post("/logout", fiberfuncCOUDaddOn.Logout)
+	app.Get("/check", fiberfuncCOUDaddOn.CheckJwt)
 
 	app.Get("/home/agency/:id", Agency.Get)
 	app.Get("/home/agency/all/:limit", Agency.GetAll)
@@ -124,7 +135,6 @@ func OpenServer() {
 
 	app.Get("/home/user/:id", User.Get)
 	app.Get("/home/user/all/:limit", User.GetAll)
-	// app.Post("/home/user/create", User.Create)
 	app.Put("/home/user/update/:id", User.Update)
 	app.Delete("/home/user/delete/:id", User.Delete)
 

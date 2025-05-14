@@ -8,6 +8,7 @@ import (
 	"bre-api/grom/handler"
 	"bre-api/grom/models"
 	"errors"
+	"fmt"
 	"os"
 	"time"
 
@@ -63,10 +64,12 @@ func LoginUser(c *fiber.Ctx) error {
 
 	//Check password
 	if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordUser), []byte(input.PasswordUser)); err != nil {
+		fmt.Println(err)
 		c.Status(fiberfuncConfig.ErrorToHashPassword.Startus)
 		return c.JSON("Sus")
 	}
 
+	colortext.IsOk("Ok")
 	//createToken token
 	tokenValue, err := createToken(user)
 	if err != nil {
@@ -81,7 +84,11 @@ func LoginUser(c *fiber.Ctx) error {
 		Value:    tokenValue,
 		Expires:  time.Now().Add(CookieLifeTime),
 		HTTPOnly: true,
-		Secure:   true,
+		Secure:   false,
+		SameSite: "None", // or "None" if using cross-site cookies
+		// origin
+		// Lax
+		// None
 	})
 
 	return c.JSON(fiber.Map{"message": "login success"})
@@ -94,7 +101,6 @@ func hashPassword(user models.User) (string, error) {
 
 func getEnv() (string, error) {
 	if err := godotenv.Load("config/.env"); err != nil {
-
 		return "", err
 	}
 	ok := os.Getenv("what")
@@ -117,4 +123,37 @@ func createToken(user models.User) (string, error) {
 
 	t, err := token.SignedString([]byte(key))
 	return t, err
+}
+func CheckJwt(c *fiber.Ctx) error {
+	tokenString := c.Cookies("jwt")
+	if tokenString == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "No token"})
+	}
+
+	secret, err := getEnv()
+	if err != nil {
+		return c.Status(500).JSON(fiber.Map{"error": "Cannot load secret"})
+	}
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		return []byte(secret), nil
+	})
+	if err != nil || !token.Valid {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid token"})
+	}
+
+	return c.JSON(fiber.Map{"message": "Authenticated"})
+}
+
+func Logout(c *fiber.Ctx) error {
+	cookie := fiber.Cookie{
+		Name:     "jwt",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
+		HTTPOnly: true,
+		Secure:   false,
+		SameSite: "None", // or "None" if using cross-site cookies
+	}
+	c.Cookie(&cookie)
+	return c.JSON(fiber.Map{"message": "logout success"})
 }
