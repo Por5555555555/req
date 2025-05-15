@@ -114,7 +114,8 @@ func openSql(T bool, TLogH bool) (*gorm.DB, error) {
 	})
 	// panic(err)
 	if err != nil {
-		err = ErrorSqlLite
+		colortext.IsLogErr("Error connecting to SQLite database:" + err.Error())
+		return nil, ErrorSqlLite
 	}
 
 	return db, err

@@ -22,7 +22,7 @@ const (
 	EndProcessCreateTable = "NotProcessOpen"
 	EndProcessCreateData  = "NotProcessOpen"
 	Limit                 = 10
-	LoaclSqlite           = "grom/databases/testdb/dbreq.db"
+	LoaclSqlite           = "gorm/databases/testdb/dbreq.db"
 
 	Openflber      = true
 	MaxSizeFile    = 5 * 1024 * 1024

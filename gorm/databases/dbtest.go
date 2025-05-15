@@ -3,6 +3,7 @@ package databases
 import (
 	"bre-api/addOn/colortext"
 	"bre-api/gorm/models"
+	"fmt"
 	"time"
 )
 
@@ -15,6 +16,7 @@ func TestFunc(T time.Time) (string, error) {
 }
 
 func endTask(T time.Time) string {
+	fmt.Println(time.Since(T).String())
 	return time.Since(T).String()
 }
 
@@ -157,6 +159,6 @@ func create(T time.Time) (string, error) {
 	}
 	colortext.IsOk("Create Requests")
 
-	endProcess = T.String()
+	endProcess = endTask(T)
 	return endProcess, nil
 }
