@@ -2,7 +2,7 @@ package fiberfuncCOUD
 
 import (
 	"bre-api/fiber/fiberfunc/fiberfuncConfig"
-	"bre-api/grom/handler"
+	"bre-api/gorm/handler"
 
 	"github.com/gofiber/fiber/v2"
 )

@@ -2,7 +2,7 @@ package routes
 
 import (
 	"bre-api/fiber/fiberfunc/fiberfuncConfig"
-	"bre-api/grom/models"
+	"bre-api/gorm/models"
 )
 
 type (

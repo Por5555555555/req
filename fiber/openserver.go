@@ -38,8 +38,8 @@ func OpenServer() {
 	}))
 
 	app.Use("/home", routes.BlockFunc)
-	app.Post("create", User.Create)
-	app.Post("login", User.Login)
+	app.Post("/create", User.Create)
+	app.Post("/login", User.Login)
 	app.Post("/logout", fiberfuncCOUDaddOn.Logout)
 	app.Get("/check", fiberfuncCOUDaddOn.CheckJwt)
 

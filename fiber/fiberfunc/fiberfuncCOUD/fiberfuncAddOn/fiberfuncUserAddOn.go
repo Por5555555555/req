@@ -4,9 +4,9 @@ import (
 	"bre-api/addOn/colortext"
 	"bre-api/config"
 	"bre-api/fiber/fiberfunc/fiberfuncConfig"
-	"bre-api/grom/databases"
-	"bre-api/grom/handler"
-	"bre-api/grom/models"
+	"bre-api/gorm/databases"
+	"bre-api/gorm/handler"
+	"bre-api/gorm/models"
 	"errors"
 	"fmt"
 	"os"
@@ -26,21 +26,21 @@ func CreateUser(c *fiber.Ctx) error {
 	user := new(models.User)
 	if err := c.BodyParser(user); err != nil {
 		c.Status(fiberfuncConfig.ErrorConvertJson.Startus)
-		return c.JSON(fiberfuncConfig.ErrorConvertJson.Err)
+		return c.JSON(fiberfuncConfig.ErrorConvertJson.Err.Error())
 	}
 
 	//Password to hashFunc
 	password, err := hashPassword(*user)
 	if err != nil {
 		c.Status(fiberfuncConfig.ErrorToHashPassword.Startus)
-		return c.JSON(fiberfuncConfig.ErrorToHashPassword.Err)
+		return c.JSON(fiberfuncConfig.ErrorToHashPassword.Err.Error())
 	}
 	user.PasswordUser = string(password)
 
 	_, err = handler.Create(user)
 	if err != nil {
 		c.Status(fiberfuncConfig.ErrorToSql.Startus)
-		return c.JSON(fiberfuncConfig.ErrorToSql.Err)
+		return c.JSON(fiberfuncConfig.ErrorToSql.Err.Error())
 	}
 
 	return c.JSON(fiber.Map{"message": "success"})
@@ -53,13 +53,13 @@ func LoginUser(c *fiber.Ctx) error {
 
 	if err := c.BodyParser(&input); err != nil {
 		c.Status(fiberfuncConfig.ErrorConvertJson.Startus)
-		return c.JSON(fiberfuncConfig.ErrorConvertJson.Err)
+		return c.JSON(fiberfuncConfig.ErrorConvertJson.Err.Error())
 	}
 
 	db := databases.GetConn()
 	if err := db.Where("Email = ?", input.Email).First(&user).Error; err != nil {
 		c.Status(fiberfuncConfig.ErrorToSql.Startus)
-		return c.JSON(fiberfuncConfig.ErrorConvertJson.Err)
+		return c.JSON(fiberfuncConfig.ErrorConvertJson.Err.Error())
 	}
 
 	//Check password

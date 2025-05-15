@@ -2,7 +2,7 @@ package fiberfuncFile
 
 import (
 	"bre-api/fiber/fiberfunc/fiberfuncConfig"
-	"bre-api/grom/handler"
+	"bre-api/gorm/handler"
 	"reflect"
 	"strings"
 

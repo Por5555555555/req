@@ -4,7 +4,7 @@ import (
 	"bre-api/addOn/colortext"
 	"bre-api/config"
 	fiberopen "bre-api/fiber"
-	"bre-api/grom/databases"
+	"bre-api/gorm/databases"
 	"fmt"
 )
 

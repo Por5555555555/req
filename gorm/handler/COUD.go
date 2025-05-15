@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"bre-api/grom/databases"
+	"bre-api/gorm/databases"
 	"fmt"
 
 	"gorm.io/gorm"

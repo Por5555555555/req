@@ -2,8 +2,8 @@ package fiberfuncFile
 
 import (
 	"bre-api/fiber/fiberfunc/fiberfuncConfig"
-	"bre-api/grom/handler"
-	"bre-api/grom/models"
+	"bre-api/gorm/handler"
+	"bre-api/gorm/models"
 	"reflect"
 
 	"github.com/gofiber/fiber/v2"

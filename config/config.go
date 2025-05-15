@@ -15,8 +15,8 @@ const (
 	// config Open Sql
 	OpenServerDataBase    = true
 	OpSql                 = false
-	CrTable               = false
-	CrUser                = false
+	CrTable               = true
+	CrUser                = true
 	TLogH                 = false
 	EndProcessOpen        = "NotProcessOpen"
 	EndProcessCreateTable = "NotProcessOpen"
