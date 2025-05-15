@@ -8,28 +8,28 @@ import (
 )
 
 func IsOk[T any](Gstring T) {
-	errColor := color.New(color.FgGreen)
+	textColor := color.New(color.FgGreen)
 	textOut := color.New(color.FgHiBlue).Add(color.Underline)
 
-	errColor.Print("Ok")
+	textColor.Print("Ok")
 	fmt.Print(" : ")
 	textOut.Println(Gstring)
 }
 
 func IsErr[T any](Gstring T) {
-	errColor := color.New(color.FgRed)
+	textColor := color.New(color.FgRed)
 	textOut := color.New(color.FgHiYellow).Add(color.Underline).SprintFunc()
 
-	errColor.Print("Err")
+	textColor.Print("Err")
 	fmt.Print(" : ")
 	log.Fatalln(textOut(Gstring))
 }
 
 func IsTime[T any](Gstring T) {
-	errColor := color.New(color.FgYellow)
+	textColor := color.New(color.FgYellow)
 	textOut := color.New(color.FgHiBlack).Add(color.Underline).SprintFunc()
 
-	errColor.Print("Time")
+	textColor.Print("Time")
 	fmt.Print(" : ")
 	fmt.Println(textOut(Gstring))
 }
