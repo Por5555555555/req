@@ -1,7 +1,7 @@
 package databases
 
 import (
-	"bre-api/grom/models"
+	"bre-api/gorm/models"
 )
 
 func CreateTabel() error {
