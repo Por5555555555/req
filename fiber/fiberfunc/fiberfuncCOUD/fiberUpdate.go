@@ -1,6 +1,7 @@
 package fiberfuncCOUD
 
 import (
+	"bre-api/addOn/colortext"
 	"bre-api/fiber/fiberfunc/fiberfuncConfig"
 	"bre-api/gorm/handler"
 	"encoding/json"
@@ -14,18 +15,21 @@ func UpdateGeneric[T any](c *fiber.Ctx) error {
 
 	id, err := fiberfuncConfig.GetId(c)
 	if err != nil {
+		colortext.IsErr(err.Error() + "1")
 		c.Status(fiberfuncConfig.ErrorConvertNumber.Startus)
 		return c.JSON(fiberfuncConfig.ErrorConvertNumber.Err)
 	}
 
 	input := new(T)
 	if err := c.BodyParser(&input); err != nil {
+		colortext.IsErr(err)
 		c.Status(fiberfuncConfig.ErrorConvertJson.Startus)
 		return c.JSON(fiberfuncConfig.ErrorConvertJson.Err)
 	}
 
 	oldData, err := handler.GetNoKey(new(T), id)
 	if err != nil {
+		colortext.IsErr(err)
 		c.Status(fiberfuncConfig.ErrorToSql.Startus)
 		return c.JSON(fiberfuncConfig.ErrorToSql.Err)
 	}
@@ -65,5 +69,5 @@ func UpdateGeneric[T any](c *fiber.Ctx) error {
 		c.Status(fiberfuncConfig.ErrorToSql.Startus)
 		return c.JSON(fiberfuncConfig.ErrorToSql.Err.Error())
 	}
-	return c.JSON(result)
+	return c.JSON(fiber.Map{"Message": result})
 }

@@ -49,6 +49,7 @@ var (
 	ReqlacementKey = fiberfuncConfig.GetString([]any{
 		Equipment{},
 		Source{},
+		Money{},
 	})
 	RequestKey = fiberfuncConfig.GetString([]any{
 		Agency{},

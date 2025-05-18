@@ -1,0 +1,3069 @@
+basePath: /
+definitions:
+  models.Agency:
+    properties:
+      Name:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.Auditor:
+    properties:
+      FirstName:
+        type: string
+      LastName:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.Category:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Consider:
+    properties:
+      all:
+        type: integer
+      canUse:
+        type: integer
+      created_at:
+        type: string
+      equipment:
+        $ref: '#/definitions/models.Equipment'
+      equipmentID:
+        type: integer
+      id:
+        type: integer
+      missing:
+        type: integer
+      reqlacement:
+        $ref: '#/definitions/models.Reqlacement'
+      reqlacementID:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.Equipment:
+    properties:
+      category:
+        $ref: '#/definitions/models.Category'
+      categoryID:
+        description: Ensure foreign keys are not null
+        type: integer
+      consider:
+        items:
+          $ref: '#/definitions/models.Consider'
+        type: array
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      unit:
+        $ref: '#/definitions/models.Unit'
+      unitID:
+        description: Ensure foreign keys are not null
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.File:
+    properties:
+      created_at:
+        type: string
+      detailsPath:
+        type: string
+      diagramPath:
+        type: string
+      id:
+        type: integer
+      nameDetails:
+        type: string
+      nameDiagram:
+        type: string
+      namePhoto:
+        type: string
+      nameQuotation:
+        type: string
+      nameRepair:
+        type: string
+      photoPath:
+        type: string
+      quotationPath:
+        type: string
+      repairPath:
+        type: string
+      reqlacement:
+        $ref: '#/definitions/models.Reqlacement'
+      reqlacementID:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.Location:
+    properties:
+      agency:
+        $ref: '#/definitions/models.Agency'
+      agencyID:
+        type: integer
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      province:
+        $ref: '#/definitions/models.Province'
+      provinceID:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.Money:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Necessary:
+    properties:
+      created_at:
+        type: string
+      frequency:
+        description: '`gorm:"type:enum(''ใช้บ่อย'',''ไม่บ่อย'');default:''ไม่บ่อย''"`'
+        type: string
+      id:
+        type: integer
+      location:
+        $ref: '#/definitions/models.Location'
+      locationID:
+        type: integer
+      other:
+        type: string
+      province:
+        description: '`gorm:"type:enum(''Y'',''N'');default:''N''"`'
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Price:
+    properties:
+      created_at:
+        type: string
+      equipment:
+        $ref: '#/definitions/models.Equipment'
+      equipmentID:
+        type: integer
+      id:
+        type: integer
+      inMarket:
+        type: integer
+      outMarket:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.Province:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Reqlacement:
+    properties:
+      created_at:
+        type: string
+      day:
+        type: string
+      equipment:
+        $ref: '#/definitions/models.Equipment'
+      equipmentID:
+        type: integer
+      id:
+        type: integer
+      money:
+        $ref: '#/definitions/models.Money'
+      moneyID:
+        type: integer
+      source:
+        $ref: '#/definitions/models.Source'
+      sourceID:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.Requests:
+    properties:
+      agency:
+        $ref: '#/definitions/models.Agency'
+      agencyID:
+        type: integer
+      auditor:
+        $ref: '#/definitions/models.Auditor'
+      auditorID:
+        type: integer
+      category:
+        $ref: '#/definitions/models.Category'
+      categoryID:
+        type: integer
+      created_at:
+        type: string
+      createdAt:
+        type: string
+      date:
+        type: string
+      equipment:
+        $ref: '#/definitions/models.Equipment'
+      equipmentID:
+        type: integer
+      frequency:
+        description: '`gorm:"type:enum(''ใช้บ่อย'',''ไม่บ่อย'');default:''ไม่บ่อย''"`'
+        type: string
+      id:
+        type: integer
+      location:
+        $ref: '#/definitions/models.Location'
+      locationID:
+        type: integer
+      other:
+        type: string
+      price:
+        $ref: '#/definitions/models.Price'
+      priceID:
+        type: integer
+      province:
+        description: '`gorm:"type:enum(''Y'',''N'');default:''N''"`'
+        type: string
+      remark:
+        type: string
+      replace:
+        type: string
+      request:
+        type: string
+      updated_at:
+        type: string
+      updatedAt:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userID:
+        type: integer
+    type: object
+  models.Source:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Unit:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.User:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      firstName:
+        type: string
+      id:
+        type: integer
+      lastName:
+        type: string
+      levelUser:
+        type: string
+      passwordUser:
+        type: string
+      updated_at:
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: นี่เป็น Project Req api มีบอกว่ามันทำไรได้เเต่ไม่มีตัวอย่าง และ unit
+    test
+  title: Project_req API
+  version: V19
+paths:
+  /create:
+    post:
+      consumes:
+      - application/json
+      description: Create a user by providing user details
+      parameters:
+      - description: User data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Invalid input
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Create a new user
+      tags:
+      - User
+  /home/Reqlacement/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Reqlacement รายการเดียวโดยใช้ ID
+      parameters:
+      - description: รหัส Reqlacement
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ดึงข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Reqlacement'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Reqlacement
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Reqlacement ตาม ID
+      tags:
+      - Reqlacement
+  /home/Reqlacement/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Reqlacement หลายรายการโดยจำกัดจำนวน
+      parameters:
+      - description: จำนวนสูงสุดของข้อมูลที่จะดึง
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: รายการ Reqlacement
+          schema:
+            items:
+              $ref: '#/definitions/models.Reqlacement'
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Reqlacement ทั้งหมด
+      tags:
+      - Reqlacement
+  /home/Reqlacement/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูล Reqlacement ใหม่
+      parameters:
+      - description: ข้อมูล Reqlacement
+        in: body
+        name: Reqlacement
+        required: true
+        schema:
+          $ref: '#/definitions/models.Reqlacement'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Reqlacement'
+        "400":
+          description: ข้อมูลส่งมาไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้างข้อมูล Reqlacement ใหม่
+      tags:
+      - Reqlacement
+  /home/Reqlacement/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ลบข้อมูล Reqlacement โดยใช้ ID
+      parameters:
+      - description: รหัส Reqlacement
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบข้อมูลสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Reqlacement
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบข้อมูล Reqlacement ตาม ID
+      tags:
+      - Reqlacement
+  /home/Reqlacement/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: อัปเดตข้อมูล Reqlacement ที่มีอยู่
+      parameters:
+      - description: รหัส Reqlacement
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูล Reqlacement ที่ต้องการอัปเดต
+        in: body
+        name: Reqlacement
+        required: true
+        schema:
+          $ref: '#/definitions/models.Reqlacement'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัปเดตข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Reqlacement'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Reqlacement
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: อัปเดตข้อมูล Reqlacement ตาม ID
+      tags:
+      - Reqlacement
+  /home/agency/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ใช้สำหรับดึงข้อมูลของหน่วยงานจากรหัสที่ระบุ
+      parameters:
+      - description: รหัสของหน่วยงานที่ต้องการดึง
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            items:
+              $ref: '#/definitions/models.Agency'
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง หรือเกิดข้อผิดพลาดจาก SQL
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: ไม่ได้รับอนุญาต
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลหน่วยงานตามรหัส
+      tags:
+      - Agency
+  /home/agency/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูลหน่วยงานทั้งหมด โดยจำกัดจำนวนตามที่กำหนด
+      parameters:
+      - description: จำนวนรายการสูงสุดที่ต้องการดึง
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/models.Agency'
+              type: array
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลหน่วยงานทั้งหมด
+      tags:
+      - Agency
+  /home/agency/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูลหน่วยงานใหม่เข้าสู่ระบบ
+      parameters:
+      - description: ข้อมูลของหน่วยงานที่ต้องการเพิ่ม
+        in: body
+        name: agency
+        required: true
+        schema:
+          $ref: '#/definitions/models.Agency'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Agency'
+        "400":
+          description: ข้อมูลไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้างหน่วยงานใหม่
+      tags:
+      - Agency
+  /home/agency/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ใช้สำหรับลบข้อมูลหน่วยงานตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสของหน่วยงานที่ต้องการลบ
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบหน่วยงาน
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบข้อมูลหน่วยงาน
+      tags:
+      - Agency
+  /home/agency/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: ใช้สำหรับแก้ไขข้อมูลของหน่วยงานที่มีอยู่ ตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสของหน่วยงานที่ต้องการแก้ไข
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูลหน่วยงานที่แก้ไขแล้ว
+        in: body
+        name: agency
+        required: true
+        schema:
+          $ref: '#/definitions/models.Agency'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัปเดตสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Agency'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบหน่วยงาน
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: แก้ไขข้อมูลหน่วยงาน
+      tags:
+      - Agency
+  /home/auditor/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ใช้สำหรับดึงข้อมูลของผู้ตรวจสอบจากรหัสที่ระบุ
+      parameters:
+      - description: รหัสของผู้ตรวจสอบที่ต้องการดึง
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            $ref: '#/definitions/models.Auditor'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง หรือเกิดข้อผิดพลาดจาก SQL
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: ไม่ได้รับอนุญาต
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลผู้ตรวจสอบตามรหัส
+      tags:
+      - Auditor
+  /home/auditor/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูลผู้ตรวจสอบทั้งหมด โดยจำกัดจำนวนตามที่กำหนด
+      parameters:
+      - description: จำนวนรายการสูงสุดที่ต้องการดึง
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/models.Auditor'
+              type: array
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลผู้ตรวจสอบทั้งหมด
+      tags:
+      - Auditor
+  /home/auditor/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูลผู้ตรวจสอบใหม่เข้าสู่ระบบ
+      parameters:
+      - description: ข้อมูลของผู้ตรวจสอบที่ต้องการเพิ่ม
+        in: body
+        name: auditor
+        required: true
+        schema:
+          $ref: '#/definitions/models.Auditor'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Auditor'
+        "400":
+          description: ข้อมูลไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้างผู้ตรวจสอบใหม่
+      tags:
+      - Auditor
+  /home/auditor/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ใช้สำหรับลบข้อมูลผู้ตรวจสอบตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสของผู้ตรวจสอบที่ต้องการลบ
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบผู้ตรวจสอบ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบข้อมูลผู้ตรวจสอบ
+      tags:
+      - Auditor
+  /home/auditor/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: ใช้สำหรับแก้ไขข้อมูลของผู้ตรวจสอบที่มีอยู่ ตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสของผู้ตรวจสอบที่ต้องการแก้ไข
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูลผู้ตรวจสอบที่แก้ไขแล้ว
+        in: body
+        name: auditor
+        required: true
+        schema:
+          $ref: '#/definitions/models.Auditor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัปเดตสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Auditor'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบผู้ตรวจสอบ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: แก้ไขข้อมูลผู้ตรวจสอบ
+      tags:
+      - Auditor
+  /home/category/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ใช้สำหรับดึงข้อมูลหมวดหมู่ตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสของหมวดหมู่ที่ต้องการดึง
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            $ref: '#/definitions/models.Category'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง หรือเกิดข้อผิดพลาดจาก SQL
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: ไม่ได้รับอนุญาต
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลหมวดหมู่ตามรหัส
+      tags:
+      - Category
+  /home/category/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูลหมวดหมู่ทั้งหมด โดยจำกัดจำนวนตามที่กำหนด
+      parameters:
+      - description: จำนวนรายการสูงสุดที่ต้องการดึง
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/models.Category'
+              type: array
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลหมวดหมู่ทั้งหมด
+      tags:
+      - Category
+  /home/category/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูลหมวดหมู่ใหม่เข้าสู่ระบบ
+      parameters:
+      - description: ข้อมูลของหมวดหมู่ที่ต้องการเพิ่ม
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/models.Category'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Category'
+        "400":
+          description: ข้อมูลไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้างหมวดหมู่ใหม่
+      tags:
+      - Category
+  /home/category/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: ใช้สำหรับแก้ไขข้อมูลหมวดหมู่ที่มีอยู่ ตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสของหมวดหมู่ที่ต้องการแก้ไข
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูลหมวดหมู่ที่แก้ไขแล้ว
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/models.Category'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัปเดตสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Category'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบหมวดหมู่
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: แก้ไขข้อมูลหมวดหมู่
+      tags:
+      - Category
+  /home/consider/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Consider รายการเดียวตาม ID
+      parameters:
+      - description: รหัส Consider
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ดึงข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Consider'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ Consider ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Consider ตาม ID
+      tags:
+      - Consider
+  /home/consider/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Consider หลายรายการพร้อมจำกัดจำนวนผลลัพธ์
+      parameters:
+      - description: จำนวนสูงสุดของรายการที่ต้องการดึง (ใช้ค่า config limit หากเป็น
+          string)
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: รายการ Consider
+          schema:
+            items:
+              $ref: '#/definitions/models.Consider'
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Consider ทั้งหมด
+      tags:
+      - Consider
+  /home/consider/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูล Consider ใหม่
+      parameters:
+      - description: ข้อมูล Consider
+        in: body
+        name: consider
+        required: true
+        schema:
+          $ref: '#/definitions/models.Consider'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Consider'
+        "400":
+          description: ข้อมูลนำเข้าไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้าง Consider ใหม่
+      tags:
+      - Consider
+  /home/consider/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ลบข้อมูล Consider ตาม ID
+      parameters:
+      - description: รหัส Consider
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบข้อมูลสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ Consider ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบ Consider
+      tags:
+      - Consider
+  /home/consider/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: แก้ไขข้อมูล Consider ตาม ID
+      parameters:
+      - description: รหัส Consider
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูล Consider ที่แก้ไข
+        in: body
+        name: consider
+        required: true
+        schema:
+          $ref: '#/definitions/models.Consider'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัพเดตข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Consider'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ Consider ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: อัพเดต Consider
+      tags:
+      - Consider
+  /home/equipment/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Equipment รายการเดียวตาม ID
+      parameters:
+      - description: รหัส Equipment
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ดึงข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Equipment'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ Equipment ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Equipment ตาม ID
+      tags:
+      - Equipment
+  /home/equipment/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Equipment หลายรายการพร้อมจำกัดจำนวนผลลัพธ์
+      parameters:
+      - description: จำนวนสูงสุดของรายการที่ต้องการดึง (ใช้ค่า config limit หากเป็น
+          string)
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: รายการ Equipment
+          schema:
+            items:
+              $ref: '#/definitions/models.Equipment'
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Equipment ทั้งหมด
+      tags:
+      - Equipment
+  /home/equipment/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูล Equipment ใหม่
+      parameters:
+      - description: ข้อมูล Equipment
+        in: body
+        name: equipment
+        required: true
+        schema:
+          $ref: '#/definitions/models.Equipment'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Equipment'
+        "400":
+          description: ข้อมูลนำเข้าไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้าง Equipment ใหม่
+      tags:
+      - Equipment
+  /home/equipment/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ลบข้อมูล Equipment ตาม ID
+      parameters:
+      - description: รหัส Equipment
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบข้อมูลสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ Equipment ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบ Equipment
+      tags:
+      - Equipment
+  /home/equipment/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: แก้ไขข้อมูล Equipment ตาม ID
+      parameters:
+      - description: รหัส Equipment
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูล Equipment ที่แก้ไข
+        in: body
+        name: equipment
+        required: true
+        schema:
+          $ref: '#/definitions/models.Equipment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัพเดตข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Equipment'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ Equipment ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: อัพเดต Equipment
+      tags:
+      - Equipment
+  /home/file/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล File รายการเดียวตาม ID
+      parameters:
+      - description: รหัส File
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ดึงข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.File'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ File ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล File ตาม ID
+      tags:
+      - File
+  /home/file/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล File หลายรายการพร้อมจำกัดจำนวนผลลัพธ์
+      parameters:
+      - description: จำนวนสูงสุดของรายการที่ต้องการดึง (หรือใช้ค่า config limit)
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: รายการ File
+          schema:
+            items:
+              $ref: '#/definitions/models.File'
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล File ทั้งหมด
+      tags:
+      - File
+  /home/file/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูล File ใหม่
+      parameters:
+      - description: ข้อมูล File
+        in: body
+        name: file
+        required: true
+        schema:
+          $ref: '#/definitions/models.File'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.File'
+        "400":
+          description: ข้อมูลนำเข้าไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้าง File ใหม่
+      tags:
+      - File
+  /home/file/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ลบข้อมูล File ตาม ID
+      parameters:
+      - description: รหัส File
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบข้อมูลสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ File ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบ File
+      tags:
+      - File
+  /home/file/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: แก้ไขข้อมูล File ตาม ID
+      parameters:
+      - description: รหัส File
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูล File ที่แก้ไข
+        in: body
+        name: file
+        required: true
+        schema:
+          $ref: '#/definitions/models.File'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัพเดตข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.File'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ File ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: อัพเดต File
+      tags:
+      - File
+  /home/location/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Location รายการเดียวตาม ID
+      parameters:
+      - description: รหัส Location
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ดึงข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Location'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ Location ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Location ตาม ID
+      tags:
+      - Location
+  /home/location/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Location หลายรายการพร้อมจำกัดจำนวนผลลัพธ์
+      parameters:
+      - description: จำนวนสูงสุดของรายการที่ต้องการดึง (หรือใช้ค่า config limit)
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: รายการ Location
+          schema:
+            items:
+              $ref: '#/definitions/models.Location'
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Location ทั้งหมด
+      tags:
+      - Location
+  /home/location/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูล Location ใหม่
+      parameters:
+      - description: ข้อมูล Location
+        in: body
+        name: location
+        required: true
+        schema:
+          $ref: '#/definitions/models.Location'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Location'
+        "400":
+          description: ข้อมูลนำเข้าไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้าง Location ใหม่
+      tags:
+      - Location
+  /home/location/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ลบข้อมูล Location ตาม ID
+      parameters:
+      - description: รหัส Location
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบข้อมูลสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ Location ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบ Location
+      tags:
+      - Location
+  /home/location/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: แก้ไขข้อมูล Location ตาม ID
+      parameters:
+      - description: รหัส Location
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูล Location ที่แก้ไข
+        in: body
+        name: location
+        required: true
+        schema:
+          $ref: '#/definitions/models.Location'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัพเดตข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Location'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบ Location ที่ระบุ
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: อัพเดต Location
+      tags:
+      - Location
+  /home/money/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ใช้สำหรับดึงข้อมูลเงินตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสของข้อมูลเงินที่ต้องการดึง
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            $ref: '#/definitions/models.Money'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง หรือเกิดข้อผิดพลาดจาก SQL
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: ไม่ได้รับอนุญาต
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลเงินตามรหัส
+      tags:
+      - Money
+  /home/money/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูลเงินทั้งหมด โดยจำกัดจำนวนตามที่กำหนด
+      parameters:
+      - description: จำนวนรายการสูงสุดที่ต้องการดึง
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/models.Money'
+              type: array
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลเงินทั้งหมด
+      tags:
+      - Money
+  /home/money/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูลเงินใหม่เข้าสู่ระบบ
+      parameters:
+      - description: ข้อมูลเงินที่ต้องการเพิ่ม
+        in: body
+        name: money
+        required: true
+        schema:
+          $ref: '#/definitions/models.Money'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Money'
+        "400":
+          description: ข้อมูลไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้างข้อมูลเงินใหม่
+      tags:
+      - Money
+  /home/money/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ใช้สำหรับลบข้อมูลเงินตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสของข้อมูลเงินที่ต้องการลบ
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูลเงิน
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบข้อมูลเงิน
+      tags:
+      - Money
+  /home/money/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: ใช้สำหรับแก้ไขข้อมูลเงินที่มีอยู่ ตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสของข้อมูลเงินที่ต้องการแก้ไข
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูลเงินที่แก้ไขแล้ว
+        in: body
+        name: money
+        required: true
+        schema:
+          $ref: '#/definitions/models.Money'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัปเดตสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Money'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูลเงิน
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: แก้ไขข้อมูลเงิน
+      tags:
+      - Money
+  /home/necessary/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Necessary รายการเดียวโดยใช้ ID
+      parameters:
+      - description: รหัส Necessary
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ดึงข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Necessary'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Necessary
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Necessary ตาม ID
+      tags:
+      - Necessary
+  /home/necessary/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Necessary หลายรายการโดยจำกัดจำนวน
+      parameters:
+      - description: จำนวนสูงสุดของข้อมูลที่จะดึง
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: รายการ Necessary
+          schema:
+            items:
+              $ref: '#/definitions/models.Necessary'
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Necessary ทั้งหมด
+      tags:
+      - Necessary
+  /home/necessary/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูล Necessary ใหม่
+      parameters:
+      - description: ข้อมูล Necessary
+        in: body
+        name: necessary
+        required: true
+        schema:
+          $ref: '#/definitions/models.Necessary'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Necessary'
+        "400":
+          description: ข้อมูลส่งมาไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้างข้อมูล Necessary ใหม่
+      tags:
+      - Necessary
+  /home/necessary/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ลบข้อมูล Necessary โดยใช้ ID
+      parameters:
+      - description: รหัส Necessary
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบข้อมูลสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Necessary
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบข้อมูล Necessary ตาม ID
+      tags:
+      - Necessary
+  /home/necessary/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: อัปเดตข้อมูล Necessary ที่มีอยู่
+      parameters:
+      - description: รหัส Necessary
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูล Necessary ที่ต้องการอัปเดต
+        in: body
+        name: necessary
+        required: true
+        schema:
+          $ref: '#/definitions/models.Necessary'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัปเดตข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Necessary'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Necessary
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: อัปเดตข้อมูล Necessary ตาม ID
+      tags:
+      - Necessary
+  /home/price/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Price รายการเดียวโดยใช้ ID
+      parameters:
+      - description: รหัส Price
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ดึงข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Price'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Price
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Price ตาม ID
+      tags:
+      - Price
+  /home/price/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Price หลายรายการโดยจำกัดจำนวน
+      parameters:
+      - description: จำนวนสูงสุดของข้อมูลที่จะดึง
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: รายการ Price
+          schema:
+            items:
+              $ref: '#/definitions/models.Price'
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Price ทั้งหมด
+      tags:
+      - Price
+  /home/price/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูล Price ใหม่
+      parameters:
+      - description: ข้อมูล Price
+        in: body
+        name: price
+        required: true
+        schema:
+          $ref: '#/definitions/models.Price'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Price'
+        "400":
+          description: ข้อมูลส่งมาไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้างข้อมูล Price ใหม่
+      tags:
+      - Price
+  /home/price/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ลบข้อมูล Price โดยใช้ ID
+      parameters:
+      - description: รหัส Price
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบข้อมูลสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Price
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบข้อมูล Price ตาม ID
+      tags:
+      - Price
+  /home/price/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: อัปเดตข้อมูล Price ที่มีอยู่
+      parameters:
+      - description: รหัส Price
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูล Price ที่ต้องการอัปเดต
+        in: body
+        name: price
+        required: true
+        schema:
+          $ref: '#/definitions/models.Price'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัปเดตข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Price'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Price
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: อัปเดตข้อมูล Price ตาม ID
+      tags:
+      - Price
+  /home/province/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ใช้สำหรับดึงข้อมูลจังหวัดตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสจังหวัดที่ต้องการดึงข้อมูล
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            $ref: '#/definitions/models.Province'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง หรือเกิดข้อผิดพลาดจาก SQL
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: ไม่ได้รับอนุญาต
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลจังหวัดตามรหัส
+      tags:
+      - Province
+  /home/province/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูลจังหวัดทั้งหมด โดยจำกัดจำนวนตามที่กำหนด
+      parameters:
+      - description: จำนวนรายการสูงสุดที่ต้องการดึง
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/models.Province'
+              type: array
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลจังหวัดทั้งหมด
+      tags:
+      - Province
+  /home/province/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูลจังหวัดใหม่เข้าสู่ระบบ
+      parameters:
+      - description: ข้อมูลจังหวัดที่ต้องการเพิ่ม
+        in: body
+        name: province
+        required: true
+        schema:
+          $ref: '#/definitions/models.Province'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Province'
+        "400":
+          description: ข้อมูลไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้างข้อมูลจังหวัดใหม่
+      tags:
+      - Province
+  /home/province/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ใช้สำหรับลบข้อมูลจังหวัดตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสจังหวัดที่ต้องการลบ
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูลจังหวัด
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบข้อมูลจังหวัด
+      tags:
+      - Province
+  /home/province/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: ใช้สำหรับแก้ไขข้อมูลจังหวัดที่มีอยู่ ตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสจังหวัดที่ต้องการแก้ไข
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูลจังหวัดที่แก้ไขแล้ว
+        in: body
+        name: province
+        required: true
+        schema:
+          $ref: '#/definitions/models.Province'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัปเดตสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Province'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูลจังหวัด
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: แก้ไขข้อมูลจังหวัด
+      tags:
+      - Province
+  /home/requests/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Request รายการเดียวโดยใช้ ID
+      parameters:
+      - description: รหัส Request
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ดึงข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Requests'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Request ตาม ID
+      tags:
+      - Requests
+  /home/requests/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูล Request หลายรายการโดยจำกัดจำนวน
+      parameters:
+      - description: จำนวนสูงสุดของข้อมูลที่จะดึง
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: รายการ Request
+          schema:
+            items:
+              $ref: '#/definitions/models.Requests'
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูล Request ทั้งหมด
+      tags:
+      - Requests
+  /home/requests/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูล Request ใหม่
+      parameters:
+      - description: ข้อมูล Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Requests'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Requests'
+        "400":
+          description: ข้อมูลส่งมาไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้างข้อมูล Request ใหม่
+      tags:
+      - Requests
+  /home/requests/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ลบข้อมูล Request โดยใช้ ID
+      parameters:
+      - description: รหัส Request
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบข้อมูลสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบข้อมูล Request ตาม ID
+      tags:
+      - Requests
+  /home/requests/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: อัปเดตข้อมูล Request ที่มีอยู่
+      parameters:
+      - description: รหัส Request
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูล Request ที่ต้องการอัปเดต
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Requests'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัปเดตข้อมูลสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Requests'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูล Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดภายในเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: อัปเดตข้อมูล Request ตาม ID
+      tags:
+      - Requests
+  /home/source/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ใช้สำหรับดึงข้อมูลแหล่งที่มาตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสแหล่งที่มาต้องการดึงข้อมูล
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            $ref: '#/definitions/models.Source'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง หรือเกิดข้อผิดพลาดจาก SQL
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: ไม่ได้รับอนุญาต
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลแหล่งที่มาตามรหัส
+      tags:
+      - Source
+  /home/source/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูลแหล่งที่มาทั้งหมด โดยจำกัดจำนวนตามที่กำหนด
+      parameters:
+      - description: จำนวนสูงสุดของรายการที่ต้องการดึง
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/models.Source'
+              type: array
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลแหล่งที่มาทั้งหมด
+      tags:
+      - Source
+  /home/source/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูลแหล่งที่มาใหม่เข้าสู่ระบบ
+      parameters:
+      - description: ข้อมูลแหล่งที่มาที่ต้องการเพิ่ม
+        in: body
+        name: source
+        required: true
+        schema:
+          $ref: '#/definitions/models.Source'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Source'
+        "400":
+          description: ข้อมูลไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้างข้อมูลแหล่งที่มาใหม่
+      tags:
+      - Source
+  /home/source/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ใช้สำหรับลบข้อมูลแหล่งที่มาตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสแหล่งที่มาที่ต้องการลบ
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูลแหล่งที่มา
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบข้อมูลแหล่งที่มา
+      tags:
+      - Source
+  /home/source/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: ใช้สำหรับแก้ไขข้อมูลแหล่งที่มาที่มีอยู่ ตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสแหล่งที่มาที่ต้องการแก้ไข
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ข้อมูลแหล่งที่มาที่แก้ไขแล้ว
+        in: body
+        name: source
+        required: true
+        schema:
+          $ref: '#/definitions/models.Source'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: อัปเดตสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Source'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูลแหล่งที่มา
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: แก้ไขข้อมูลแหล่งที่มา
+      tags:
+      - Source
+  /home/unit/{id}:
+    get:
+      consumes:
+      - application/json
+      description: ใช้สำหรับดึงข้อมูลหน่วยตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสหน่วยที่ต้องการดึงข้อมูล
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            $ref: '#/definitions/models.Unit'
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง หรือเกิดข้อผิดพลาดจาก SQL
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: ไม่ได้รับอนุญาต
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลหน่วยตามรหัส
+      tags:
+      - Unit
+  /home/unit/all/{limit}:
+    get:
+      consumes:
+      - application/json
+      description: ดึงข้อมูลหน่วยทั้งหมดโดยจำกัดจำนวนตามที่กำหนด
+      parameters:
+      - description: จำนวนสูงสุดของรายการที่ต้องการดึง
+        in: path
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: สำเร็จ
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/models.Unit'
+              type: array
+            type: array
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ดึงข้อมูลหน่วยทั้งหมด
+      tags:
+      - Unit
+  /home/unit/create:
+    post:
+      consumes:
+      - application/json
+      description: เพิ่มข้อมูลหน่วยใหม่เข้าสู่ระบบ
+      parameters:
+      - description: ข้อมูลหน่วยที่ต้องการเพิ่ม
+        in: body
+        name: unit
+        required: true
+        schema:
+          $ref: '#/definitions/models.Unit'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: สร้างสำเร็จ
+          schema:
+            $ref: '#/definitions/models.Unit'
+        "400":
+          description: ข้อมูลไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: สร้างข้อมูลหน่วยใหม่
+      tags:
+      - Unit
+  /home/unit/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ใช้สำหรับลบข้อมูลหน่วยตามรหัสที่ระบุ
+      parameters:
+      - description: รหัสหน่วยที่ต้องการลบ
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ลบสำเร็จ
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: พารามิเตอร์ไม่ถูกต้อง
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: ไม่พบข้อมูลหน่วย
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: ข้อผิดพลาดจากเซิร์ฟเวอร์
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ลบข้อมูลหน่วย
+      tags:
+      - Unit
+  /home/unit/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update an existing unit by ID
+      parameters:
+      - description: Unit ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated unit data
+        in: body
+        name: unit
+        required: true
+        schema:
+          $ref: '#/definitions/models.Unit'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully updated
+          schema:
+            $ref: '#/definitions/models.Unit'
+        "400":
+          description: Invalid parameters
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Unit not found
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Update a unit
+      tags:
+      - Unit
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Loing User
+      parameters:
+      - description: User data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Login User For jwt
+      tags:
+      - User
+schemes:
+- http
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

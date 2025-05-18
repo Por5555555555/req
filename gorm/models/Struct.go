@@ -6,24 +6,31 @@ import (
 	"gorm.io/gorm"
 )
 
+type MyModels struct {
+	ID        uint      `json:"id" gorm:"primaryKey"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
 type Agency struct {
-	gorm.Model
-	Name string
+	MyModels
+	DeletedAt gorm.DeletedAt `json:"-" gorm:"index"`
+	Name      string         `json:"Name"`
 }
 
 type Auditor struct {
-	gorm.Model
-	FirstName string
-	LastName  string
+	MyModels
+	FirstName string `json:"FirstName"`
+	LastName  string `json:"LastName"`
 }
 
 type Category struct {
-	gorm.Model
+	MyModels
 	Name string
 }
 
 type Consider struct {
-	gorm.Model
+	MyModels
 	ReqlacementID uint        `gorm:"not null"`
 	Reqlacement   Reqlacement `gorm:"constraint:OnDelete:CASCADE"`
 	EquipmentID   uint        `gorm:"not null"`
@@ -34,7 +41,7 @@ type Consider struct {
 }
 
 type Equipment struct {
-	gorm.Model
+	MyModels
 	Name       string
 	CategoryID uint       `gorm:"not null"` // Ensure foreign keys are not null
 	Category   Category   `gorm:"constraint:OnDelete:CASCADE"`
@@ -44,7 +51,7 @@ type Equipment struct {
 }
 
 type File struct {
-	gorm.Model
+	MyModels
 	NameQuotation string
 	QuotationPath string
 
@@ -65,7 +72,7 @@ type File struct {
 }
 
 type Location struct {
-	gorm.Model
+	MyModels
 	Name       string
 	AgencyID   uint     `gorm:"not null"`
 	Agency     Agency   `gorm:"constraint:OnDelete:CASCADE"`
@@ -74,12 +81,12 @@ type Location struct {
 }
 
 type Money struct {
-	gorm.Model
+	MyModels
 	Name string
 }
 
 type Necessary struct {
-	gorm.Model
+	MyModels
 	LocationID uint     `gorm:"not null"`
 	Location   Location `gorm:"constraint:OnDelete:CASCADE"`
 	Frequency  string   //`gorm:"type:enum('ใช้บ่อย','ไม่บ่อย');default:'ไม่บ่อย'"`
@@ -88,7 +95,7 @@ type Necessary struct {
 }
 
 type Price struct {
-	gorm.Model
+	MyModels
 	EquipmentID uint      `gorm:"not null"`
 	Equipment   Equipment `gorm:"constraint:OnDelete:CASCADE"`
 	InMarket    int
@@ -96,12 +103,12 @@ type Price struct {
 }
 
 type Province struct {
-	gorm.Model
+	MyModels
 	Name string
 }
 
 type Reqlacement struct {
-	gorm.Model
+	MyModels
 	EquipmentID uint      `gorm:"not null"`
 	Equipment   Equipment `gorm:"constraint:OnDelete:CASCADE"`
 	SourceID    uint      `gorm:"not null"`
@@ -138,17 +145,17 @@ type Requests struct {
 }
 
 type Source struct {
-	gorm.Model
+	MyModels
 	Name string
 }
 
 type Unit struct {
-	gorm.Model
+	MyModels
 	Name string
 }
 
 type User struct {
-	gorm.Model
+	MyModels
 	FirstName    string
 	LastName     string
 	LevelUser    string

@@ -4,8 +4,11 @@ import (
 	fiberfuncCOUDaddOn "bre-api/fiber/fiberfunc/fiberfuncCOUD/fiberfuncAddOn"
 	"bre-api/fiber/routes"
 
+	_ "bre-api/docs"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/swagger"
 )
 
 var (
@@ -30,12 +33,10 @@ var (
 func OpenServer() {
 	app := fiber.New()
 
-	app.Use(cors.New(cors.Config{
-		AllowOrigins:     "http://localhost:5173", // ระบุ origin ตรง ๆ
-		AllowCredentials: true,                    // เปิดให้ส่ง cookie ได้
-		AllowHeaders:     "Content-Type,Authorization",
-		AllowMethods:     "GET,POST,PUT,DELETE,OPTIONS",
-	}))
+	app.Use(cors.New(cors.Config{}))
+
+	// Swagger rounter
+	app.Get("/swagger/*", swagger.HandlerDefault)
 
 	app.Use("/home", routes.BlockFunc)
 	app.Post("/create", User.Create)
@@ -44,6 +45,7 @@ func OpenServer() {
 	app.Get("/check", fiberfuncCOUDaddOn.CheckJwt)
 
 	app.Get("/home/agency/:id", Agency.Get)
+
 	app.Get("/home/agency/all/:limit", Agency.GetAll)
 	app.Post("/home/agency/create", Agency.Create)
 	app.Put("/home/agency/update/:id", Agency.Update)

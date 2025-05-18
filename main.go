@@ -8,6 +8,15 @@ import (
 	"fmt"
 )
 
+// @title  Project_req API
+// @version V19
+// @host localhost:8000
+// @description นี่เป็น Project Req api มีบอกว่ามันทำไรได้เเต่ไม่มีตัวอย่าง และ unit test
+// @BasePath /
+// @schemes http
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 
 	if !config.OpenServerDataBase {
