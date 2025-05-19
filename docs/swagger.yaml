@@ -160,9 +160,7 @@ definitions:
       locationID:
         type: integer
       other:
-        type: string
-      province:
-        description: '`gorm:"type:enum(''Y'',''N'');default:''N''"`'
+        description: Province   string   //`gorm:"type:enum('Y','N');default:'N'"`
         type: string
       updated_at:
         type: string
@@ -252,14 +250,12 @@ definitions:
       locationID:
         type: integer
       other:
+        description: Province   string   //`gorm:"type:enum('Y','N');default:'N'"`
         type: string
       price:
         $ref: '#/definitions/models.Price'
       priceID:
         type: integer
-      province:
-        description: '`gorm:"type:enum(''Y'',''N'');default:''N''"`'
-        type: string
       remark:
         type: string
       replace:
@@ -324,6 +320,27 @@ info:
   title: Project_req API
   version: V19
 paths:
+  /check:
+    get:
+      consumes:
+      - application/json
+      description: ใช้ดูว่า ่ jwt ยังใช้ได้หรือไม่
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Check success
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+      summary: ตรวจสอบ JWT
+      tags:
+      - User
   /create:
     post:
       consumes:
@@ -339,7 +356,7 @@ paths:
       produces:
       - application/json
       responses:
-        "201":
+        "200":
           description: Created
           schema:
             $ref: '#/definitions/models.User'
@@ -624,7 +641,7 @@ paths:
       produces:
       - application/json
       responses:
-        "201":
+        "200":
           description: สร้างสำเร็จ
           schema:
             $ref: '#/definitions/models.Agency'
@@ -806,7 +823,7 @@ paths:
       produces:
       - application/json
       responses:
-        "201":
+        "200":
           description: สร้างสำเร็จ
           schema:
             $ref: '#/definitions/models.Auditor'
@@ -988,7 +1005,7 @@ paths:
       produces:
       - application/json
       responses:
-        "201":
+        "200":
           description: สร้างสำเร็จ
           schema:
             $ref: '#/definitions/models.Category'
@@ -1855,7 +1872,7 @@ paths:
       produces:
       - application/json
       responses:
-        "201":
+        "200":
           description: สร้างสำเร็จ
           schema:
             $ref: '#/definitions/models.Money'
@@ -2397,7 +2414,7 @@ paths:
       produces:
       - application/json
       responses:
-        "201":
+        "200":
           description: สร้างสำเร็จ
           schema:
             $ref: '#/definitions/models.Province'
@@ -2759,7 +2776,7 @@ paths:
       produces:
       - application/json
       responses:
-        "201":
+        "200":
           description: สร้างสำเร็จ
           schema:
             $ref: '#/definitions/models.Source'
@@ -2941,7 +2958,7 @@ paths:
       produces:
       - application/json
       responses:
-        "201":
+        "200":
           description: สร้างสำเร็จ
           schema:
             $ref: '#/definitions/models.Unit'
@@ -3041,7 +3058,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: Loing User
+      description: login User
       parameters:
       - description: User data
         in: body
@@ -3052,11 +3069,27 @@ paths:
       produces:
       - application/json
       responses:
-        "201":
+        "200":
           description: Created
           schema:
             $ref: '#/definitions/models.User'
       summary: Login User For jwt
+      tags:
+      - User
+  /logout:
+    post:
+      consumes:
+      - application/json
+      description: logout User
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: logout success
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Logout User
       tags:
       - User
 schemes:

@@ -90,8 +90,8 @@ type Necessary struct {
 	LocationID uint     `gorm:"not null"`
 	Location   Location `gorm:"constraint:OnDelete:CASCADE"`
 	Frequency  string   //`gorm:"type:enum('ใช้บ่อย','ไม่บ่อย');default:'ไม่บ่อย'"`
-	Province   string   //`gorm:"type:enum('Y','N');default:'N'"`
-	Other      string
+	// Province   string   //`gorm:"type:enum('Y','N');default:'N'"`
+	Other string
 }
 
 type Price struct {

@@ -45,7 +45,7 @@ func (Agency) GetAll(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param agency body models.Agency true "ข้อมูลของหน่วยงานที่ต้องการเพิ่ม"
-// @Success 201 {object} models.Agency "สร้างสำเร็จ"
+// @Success 200 {object} models.Agency "สร้างสำเร็จ"
 // @Failure 400 {object} map[string]interface{} "ข้อมูลไม่ถูกต้อง"
 // @Failure 500 {object} map[string]interface{} "ข้อผิดพลาดจากเซิร์ฟเวอร์"
 // @Router /home/agency/create [post]
@@ -126,7 +126,7 @@ func (Auditor) GetAll(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param auditor body models.Auditor true "ข้อมูลของผู้ตรวจสอบที่ต้องการเพิ่ม"
-// @Success 201 {object} models.Auditor "สร้างสำเร็จ"
+// @Success 200 {object} models.Auditor "สร้างสำเร็จ"
 // @Failure 400 {object} map[string]interface{} "ข้อมูลไม่ถูกต้อง"
 // @Failure 500 {object} map[string]interface{} "ข้อผิดพลาดจากเซิร์ฟเวอร์"
 // @Router /home/auditor/create [post]
@@ -207,7 +207,7 @@ func (Category) GetAll(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param category body models.Category true "ข้อมูลของหมวดหมู่ที่ต้องการเพิ่ม"
-// @Success 201 {object} models.Category "สร้างสำเร็จ"
+// @Success 200 {object} models.Category "สร้างสำเร็จ"
 // @Failure 400 {object} map[string]interface{} "ข้อมูลไม่ถูกต้อง"
 // @Failure 500 {object} map[string]interface{} "ข้อผิดพลาดจากเซิร์ฟเวอร์"
 // @Router /home/category/create [post]
@@ -289,7 +289,7 @@ func (Money) GetAll(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param money body models.Money true "ข้อมูลเงินที่ต้องการเพิ่ม"
-// @Success 201 {object} models.Money "สร้างสำเร็จ"
+// @Success 200 {object} models.Money "สร้างสำเร็จ"
 // @Failure 400 {object} map[string]interface{} "ข้อมูลไม่ถูกต้อง"
 // @Failure 500 {object} map[string]interface{} "ข้อผิดพลาดจากเซิร์ฟเวอร์"
 // @Router /home/money/create [post]
@@ -370,7 +370,7 @@ func (Province) GetAll(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param province body models.Province true "ข้อมูลจังหวัดที่ต้องการเพิ่ม"
-// @Success 201 {object} models.Province "สร้างสำเร็จ"
+// @Success 200 {object} models.Province "สร้างสำเร็จ"
 // @Failure 400 {object} map[string]interface{} "ข้อมูลไม่ถูกต้อง"
 // @Failure 500 {object} map[string]interface{} "ข้อผิดพลาดจากเซิร์ฟเวอร์"
 // @Router /home/province/create [post]
@@ -451,7 +451,7 @@ func (Source) GetAll(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param source body models.Source true "ข้อมูลแหล่งที่มาที่ต้องการเพิ่ม"
-// @Success 201 {object} models.Source "สร้างสำเร็จ"
+// @Success 200 {object} models.Source "สร้างสำเร็จ"
 // @Failure 400 {object} map[string]interface{} "ข้อมูลไม่ถูกต้อง"
 // @Failure 500 {object} map[string]interface{} "ข้อผิดพลาดจากเซิร์ฟเวอร์"
 // @Router /home/source/create [post]
@@ -532,7 +532,7 @@ func (Unit) GetAll(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param unit body models.Unit true "ข้อมูลหน่วยที่ต้องการเพิ่ม"
-// @Success 201 {object} models.Unit "สร้างสำเร็จ"
+// @Success 200 {object} models.Unit "สร้างสำเร็จ"
 // @Failure 400 {object} map[string]interface{} "ข้อมูลไม่ถูกต้อง"
 // @Failure 500 {object} map[string]interface{} "ข้อผิดพลาดจากเซิร์ฟเวอร์"
 // @Router /home/unit/create [post]
@@ -590,7 +590,7 @@ func (User) GetAll(c *fiber.Ctx) error {
 // @Accept  json
 // @Produce  json
 // @Param user body models.User true "User data"
-// @Success 201 {object} models.User "Created"
+// @Success 200 {object} models.User "Created"
 // @Failure 400 {object} map[string]interface{} "Invalid input"
 // @Failure 500 {object} map[string]interface{} "Internal server error"
 // @Router /create [post]
@@ -600,16 +600,17 @@ func (User) Create(c *fiber.Ctx) error {
 
 // LoginUser gpdoc
 // @Summary Login User For jwt
-// @Description Loing User
+// @Description login User
 // @Tags User
 // @Accept json
 // @Produce json
 // @Param user body models.User true "User data"
-// @Success 201 {object} models.User "Created"
+// @Success 200 {object} models.User "Created"
 // @Router /login [post]
 func (User) Login(c *fiber.Ctx) error {
 	return fiberfuncCOUDaddOn.LoginUser(c)
 }
+
 func (User) Update(c *fiber.Ctx) error {
 	return c.JSON("this func dont support")
 }
@@ -620,4 +621,29 @@ func (User) Delete(c *fiber.Ctx) error {
 // ----------------------------------------
 func BlockFunc(c *fiber.Ctx) error {
 	return fiberfuncCOUDaddOn.BlockFunc(c)
+}
+
+// LoginUser gpdoc
+// @Summary Logout User
+// @Description logout User
+// @Tags User
+// @Accept json
+// @Produce json
+// @Success 200 {object} map[string]interface{} "logout success"
+// @Router /logout [post]
+func Logout(c *fiber.Ctx) error {
+	return fiberfuncCOUDaddOn.Logout(c)
+}
+
+// CheckJwt gpdoc
+// @Summary ตรวจสอบ JWT
+// @Description ใช้ดูว่า ่ jwt ยังใช้ได้หรือไม่
+// @Tags User
+// @Accept json
+// @Produce json
+// @Success 200 {object} map[string]interface{} "Check success"
+// @Failure 401 {object} map[string]interface{} "Unauthorized"
+// @Router /check [get]
+func CheckJwt(c *fiber.Ctx) error {
+	return fiberfuncCOUDaddOn.CheckJwt(c)
 }

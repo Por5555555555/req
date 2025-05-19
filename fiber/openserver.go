@@ -1,7 +1,6 @@
 package fiberopen
 
 import (
-	fiberfuncCOUDaddOn "bre-api/fiber/fiberfunc/fiberfuncCOUD/fiberfuncAddOn"
 	"bre-api/fiber/routes"
 
 	_ "bre-api/docs"
@@ -41,8 +40,8 @@ func OpenServer() {
 	app.Use("/home", routes.BlockFunc)
 	app.Post("/create", User.Create)
 	app.Post("/login", User.Login)
-	app.Post("/logout", fiberfuncCOUDaddOn.Logout)
-	app.Get("/check", fiberfuncCOUDaddOn.CheckJwt)
+	app.Post("/logout", routes.Logout)
+	app.Get("/check", routes.CheckJwt)
 
 	app.Get("/home/agency/:id", Agency.Get)
 

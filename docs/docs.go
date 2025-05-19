@@ -15,6 +15,37 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/check": {
+            "get": {
+                "description": "ใช้ดูว่า ่ jwt ยังใช้ได้หรือไม่",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "ตรวจสอบ JWT",
+                "responses": {
+                    "200": {
+                        "description": "Check success",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
         "/create": {
             "post": {
                 "description": "Create a user by providing user details",
@@ -40,7 +71,7 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/models.User"
@@ -406,7 +437,7 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Agency"
@@ -678,7 +709,7 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Auditor"
@@ -947,7 +978,7 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Category"
@@ -2226,7 +2257,7 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Money"
@@ -3027,7 +3058,7 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Province"
@@ -3562,7 +3593,7 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Source"
@@ -3831,7 +3862,7 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Unit"
@@ -4025,7 +4056,7 @@ const docTemplate = `{
         },
         "/login": {
             "post": {
-                "description": "Loing User",
+                "description": "login User",
                 "consumes": [
                     "application/json"
                 ],
@@ -4048,10 +4079,34 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/models.User"
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "description": "logout User",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logout User",
+                "responses": {
+                    "200": {
+                        "description": "logout success",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
                         }
                     }
                 }
@@ -4301,10 +4356,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "other": {
-                    "type": "string"
-                },
-                "province": {
-                    "description": "` + "`" + `gorm:\"type:enum('Y','N');default:'N'\"` + "`" + `",
+                    "description": "Province   string   //` + "`" + `gorm:\"type:enum('Y','N');default:'N'\"` + "`" + `",
                     "type": "string"
                 },
                 "updated_at": {
@@ -4440,6 +4492,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "other": {
+                    "description": "Province   string   //` + "`" + `gorm:\"type:enum('Y','N');default:'N'\"` + "`" + `",
                     "type": "string"
                 },
                 "price": {
@@ -4447,10 +4500,6 @@ const docTemplate = `{
                 },
                 "priceID": {
                     "type": "integer"
-                },
-                "province": {
-                    "description": "` + "`" + `gorm:\"type:enum('Y','N');default:'N'\"` + "`" + `",
-                    "type": "string"
                 },
                 "remark": {
                     "type": "string"

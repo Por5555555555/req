@@ -12,6 +12,37 @@
     "host": "localhost:8000",
     "basePath": "/",
     "paths": {
+        "/check": {
+            "get": {
+                "description": "ใช้ดูว่า ่ jwt ยังใช้ได้หรือไม่",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "ตรวจสอบ JWT",
+                "responses": {
+                    "200": {
+                        "description": "Check success",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
         "/create": {
             "post": {
                 "description": "Create a user by providing user details",
@@ -37,7 +68,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/models.User"
@@ -403,7 +434,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Agency"
@@ -675,7 +706,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Auditor"
@@ -944,7 +975,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Category"
@@ -2223,7 +2254,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Money"
@@ -3024,7 +3055,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Province"
@@ -3559,7 +3590,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Source"
@@ -3828,7 +3859,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "สร้างสำเร็จ",
                         "schema": {
                             "$ref": "#/definitions/models.Unit"
@@ -4022,7 +4053,7 @@
         },
         "/login": {
             "post": {
-                "description": "Loing User",
+                "description": "login User",
                 "consumes": [
                     "application/json"
                 ],
@@ -4045,10 +4076,34 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/models.User"
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "description": "logout User",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logout User",
+                "responses": {
+                    "200": {
+                        "description": "logout success",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
                         }
                     }
                 }
@@ -4298,10 +4353,7 @@
                     "type": "integer"
                 },
                 "other": {
-                    "type": "string"
-                },
-                "province": {
-                    "description": "`gorm:\"type:enum('Y','N');default:'N'\"`",
+                    "description": "Province   string   //`gorm:\"type:enum('Y','N');default:'N'\"`",
                     "type": "string"
                 },
                 "updated_at": {
@@ -4437,6 +4489,7 @@
                     "type": "integer"
                 },
                 "other": {
+                    "description": "Province   string   //`gorm:\"type:enum('Y','N');default:'N'\"`",
                     "type": "string"
                 },
                 "price": {
@@ -4444,10 +4497,6 @@
                 },
                 "priceID": {
                     "type": "integer"
-                },
-                "province": {
-                    "description": "`gorm:\"type:enum('Y','N');default:'N'\"`",
-                    "type": "string"
                 },
                 "remark": {
                     "type": "string"
